@@ -1,0 +1,3 @@
+[submodule "protopb"]
+	path = protopb
+	url = git@github.com:solost23/protopb.git

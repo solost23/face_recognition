@@ -1,0 +1,17 @@
+name: "face_recognition_service"
+mode: "debug"
+time_location: "Asia/Shanghai"
+config_path: "srv/face_recognition"
+
+consul:
+  host: "localhost"
+  port: 8500
+
+mongo:
+  hosts:
+    - "localhost:27017"
+  auth_source: ""
+  username: ""
+  password: ""
+  timeout: 30
+
