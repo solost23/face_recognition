@@ -13,7 +13,11 @@ class Server:
     def run(self):
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=10),
                              options=[('grpc.max_receive_message_length', 100 * 1024 * 1024)])
-        mongo = pymongo.MongoClient("mongodb://" + self.config.get('mongo').get('hosts')[0])
+
+        mongo = pymongo.MongoClient('mongodb://%s' % self.config.get('mongo').get('hosts')[0],
+                                    username=self.config.get('mongo').get('username'),
+                                    password=self.config.get('mongo').get('password'),
+                                    authSource=self.config.get('mongo').get('auth_source'))
         handle.init(config.config(server, mongo))
 
         ip = internal.get_internal_ip()
