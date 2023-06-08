@@ -1,8 +1,7 @@
 import os, sys
 sys.path.append(os.getcwd() + '/protopb/gen/py3')
 
-import yaml
-import consul
+import yaml, consul
 
 from internal.server.server import Server
 

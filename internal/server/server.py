@@ -1,12 +1,8 @@
-import grpc
-import consul
-import pymongo
-import time
+import grpc, consul, pymongo, time
 
 from concurrent import futures
 
-from internal.handler import handle
-from internal.handler import config
+from internal.handler import handle, config
 from pkg.helper import internal
 
 
@@ -33,7 +29,7 @@ class Server:
         try:
             while True:
                 time.sleep(186400)
-        except:
+        except Exception as _:
             self.unregister(c, self.config.get('name'), ip, port)
             server.stop(0)
 

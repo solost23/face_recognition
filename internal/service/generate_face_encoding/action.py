@@ -1,7 +1,4 @@
-import io
-import json
-import re
-
+import io, json
 import face_recognition as fr
 
 from internal.service.base import action

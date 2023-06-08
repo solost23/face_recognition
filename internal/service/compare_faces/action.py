@@ -1,7 +1,7 @@
 import io, numpy, json
+import face_recognition as fr
 
 from internal.service.base import action
-import face_recognition as fr
 from protopb.gen.py3.protos.face_recognition import face_recognition_pb2 as face_recognition
 from protopb.gen.py3.protos.common import common_pb2 as common
 
@@ -32,7 +32,7 @@ def deal(self, request, context):
     known_face_encodings = []
     user_ids = []
 
-    for user in self.get_mongo()['twitta']['users'].find():
+    for user in self.get_mongo()['twitta']['users'].find({}, {'_id': 1, 'face_encoding': 1}):
         known_face_encodings.append(json.loads(user.get('face_encoding')))
         user_ids.append(user.get('_id'))
 
