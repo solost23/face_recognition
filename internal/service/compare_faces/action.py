@@ -3,6 +3,7 @@ import io, numpy, json
 from internal.service.base import action
 import face_recognition as fr
 from protopb.gen.py3.protos.face_recognition import face_recognition_pb2 as face_recognition
+from protopb.gen.py3.protos.common import common_pb2 as common
 
 
 class Action(action.Action):
@@ -23,7 +24,9 @@ def deal(self, request, context):
     if len(auth_face) <= 0:
         return face_recognition.CompareFacesResponse(userId='', isFound=False)
     if len(auth_face) > 1:
-        return context.set_details('不支持多张人脸进行认证')
+        return face_recognition.CompareFacesResponse(userId='',
+                                                     isFound=False,
+                                                     errorInfo=common.errorInfo(code=1500, msg='不支持多张人脸进行认证'))
 
     # 与脸库对比
     known_face_encodings = []
